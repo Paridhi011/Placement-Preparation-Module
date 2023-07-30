@@ -1,0 +1,17 @@
+int numSubarrayWithXOR(vector<int> &A, int target) {
+    int n = A.size();
+	int ans = 0;
+	int prefixXor = 0;
+	unordered_map<int, int> countOfPrefixXor;
+	for (int i = 0; i < n; i++) {
+		prefixXor ^= A[i];
+		if (prefixXor == target) {
+			ans++;
+		}
+		if (countOfPrefixXor[prefixXor ^ target] != 0) {
+			ans += countOfPrefixXor[prefixXor ^ target];
+		}
+		countOfPrefixXor[prefixXor]++;
+	}
+	return ans;
+}
