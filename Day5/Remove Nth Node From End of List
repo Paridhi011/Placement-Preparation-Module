@@ -1,0 +1,25 @@
+class Solution {
+public:
+    ListNode* deleteNth(ListNode* head, int pos){
+        if(pos==0){
+            head=head->next;
+            return head;
+        }
+        ListNode* prev=head;
+        for(int i=0; i<pos-1; i++){
+            prev=prev->next;
+        }
+        prev->next=prev->next->next;
+        return head;
+    }
+    ListNode* removeNthFromEnd(ListNode* head, int n) {
+        ListNode* curr=head;
+        int cnt=0;
+        while(curr!=NULL){
+            curr=curr->next;
+            cnt++;
+        }
+        int pos=(cnt-n);
+        return deleteNth(head, pos);
+    }
+};
